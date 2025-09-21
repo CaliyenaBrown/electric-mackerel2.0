@@ -1,5 +1,7 @@
 
 #load data 
+NW_meta2 <- readRDS("NW_meta_clean.rds")
+
 NW_det <- readRDS("NWArm_Mackerel (2).rds") %>%
   dplyr::select(-speed, -llon, -llat, -lag_station, -lagdt, -dist, -time_diff) %>%
   dplyr::rename(station = r) %>%
@@ -32,3 +34,5 @@ proportion_false <- false_detections / total_detections
 
 cat("False detections filtered out:", false_detections, "\n")
 cat("Proportion of false detections:", round(proportion_false * 100, 2), "%\n")
+
+cat("completed all operations")

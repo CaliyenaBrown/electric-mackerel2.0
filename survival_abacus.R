@@ -228,3 +228,5 @@ ggplot(det, aes(x = dt, y = oid_short)) +
 ggsave("abacus_plot_mortality.png", last_plot(), width = 12, height = 8, 
        units = "in", dpi = 300)
 
+
+cat("completed all operations")

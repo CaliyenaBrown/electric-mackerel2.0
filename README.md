@@ -4,18 +4,7 @@
 This repository contains the code and data used in the analysis and figures for the paper "Surgical Tagging of Atlantic Mackerel (Scomber scombrus): Electroanesthesia and Survival in Captivity and the Field" by Brown et al. (2025). 
 The study investigates the use of electroanesthesia for surgical tagging of Atlantic mackerel and evaluates the survival rates in both captive and field conditions.
 
-Requires R version 4.2.0 or higher and the following packages:
-- tidyverse
-- ggplot2
-- dplyr
-- readr
-- lubridate
-- survival
-- survminer
-- rnaturalearth
-- rnaturalearthhires
-- cowplot
-- sf
+All code works on R version 4.4.2.
 
 Download the zipfile of the repository. Some of the files need to be ran before others. 
 If you are interested in the analysis for the lab portion of the study, start with the
