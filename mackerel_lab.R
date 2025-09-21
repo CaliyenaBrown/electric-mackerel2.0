@@ -213,7 +213,7 @@ d <- lab %>%
   mutate(Handling_Time = case_when(ht > 103 ~ "> 103 sec", TRUE ~ "≤ 103 sec")) %>%  
   dplyr::select(ht, m, int, Handling_Time) %>%
   mutate(m = case_when(m == 0 ~ 2, TRUE ~ 1)) %>%  # Convert mortality to binary survival indicator
-  left_join(Mort_date, by = c("int" = "Days"))
+  left_join(mort, by = c("int" = "Days"))
 
 #convert mortality counts into binary survival data
 d <- d %>%
@@ -260,7 +260,7 @@ d <- lab %>%
                               TRUE ~ paste("≤ ", tl_median, "cm", sep = ""))) %>%
   dplyr::select(tl, m, int, TL_Group) %>%
   mutate(m = case_when(m == 0 ~ 2, TRUE ~ 1)) %>%  # Convert mortality to binary survival indicator
-  left_join(Mort_date, by = c("int" = "Days"))
+  left_join(mort, by = c("int" = "Days"))
 
 #convert mortality counts into binary survival data
 d <- d %>%
@@ -400,3 +400,5 @@ ggplot(lab_long_dead, aes(x = redness, y = value)) +
 
 ggsave("wound_condition_boxplots.png", last_plot(), width = 10, height = 6, 
        units = "in", dpi = 300)
+
+cat("completed all operations")

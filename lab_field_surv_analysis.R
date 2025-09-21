@@ -409,3 +409,5 @@ combined_data <- bind_rows(field_data, lab_data)
 
 logrank_test <- survdiff(Surv(int, event) ~ group, data = combined_data)
 print(logrank_test)
+
+cat("completed all operations")
