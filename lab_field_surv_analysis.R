@@ -127,13 +127,19 @@ print(p_field)
 
 ms_lab <- survfit(Surv(int, m) ~ 1, data = d)
 
-#Plot survival curve for all mackerel
-p_lab <- ggsurvplot(ms_lab, 
-                    censor = T, 
-                    palette = "darkgreen") +
-  theme_survminer(font.x = c(16), font.y = c(16), font.legend = c(14)) +
-  labs(x = "Time (Days)", y = "Survival Probability")
-p_lab
+#plot survival curve for all mackerel
+p_lab <- ggsurvplot(
+  ms_lab,
+  censor = TRUE,
+  palette = "darkgreen",
+  xlab = "Time (Days)",
+  ylab = "Survival Probability",
+  font.x = 16,
+  font.y = 16,
+  font.legend = 14
+)
+
+p_lab  
 
 #combine the two survival plots
 #use survival objects created for field and lab mackerel
@@ -143,13 +149,17 @@ p_combined <- ggsurvplot_combine(
   data = list(last_detection, d),
   legend.title = "",
   legend.labs = c("Field", "Lab"),
-  censor = T,
-  conf.int = F,
-  palette = c("darkblue", "forestgreen")
-) +
-  theme_survminer(font.x = c(16), font.y = c(16), font.legend = c(16)) +
-  labs(x = "Time (Days)", y = "Survival Probability") 
-p_combined
+  censor = TRUE,
+  conf.int = FALSE,
+  palette = c("darkblue", "forestgreen"),
+  xlab = "Time (Days)",
+  ylab = "Survival Probability",
+  font.x = 16,
+  font.y = 16,
+  font.legend = 16
+)
+
+p_combined 
 
 ggsave("survival_analysis_overall2.png", last_plot(), width = 8, height = 6, 
        units = "in", dpi = 300)
@@ -185,7 +195,7 @@ logrank_test
 ####CHECKING SURVIVAL USING MATCHED DETECTIONS ON RECEIVERS OUTSIDE OF THE NWA---------------
 
 #load detections from OTN
-dets_out <- read_csv("~/Documents/MSc/Ongoing Papers/Mackerel /v2lnasti_matched_detections_2024.csv") %>%
+dets_out <- read_csv("v2lnasti_matched_detections_2024.csv") %>%
   dplyr::select(tagname, station, datecollected, longitude, latitude) %>%
   rename(oid = tagname, date = datecollected, lon = longitude, lat = latitude)
 
@@ -215,9 +225,9 @@ detected_outside_mortality <- mortality_ids[mortality_ids %in% fish_detected_out
 
 #display results
 if (length(detected_outside_mortality) == 0) {
-  cat("✅ None of the 4 mortality fish were detected outside the study site.\n")
+  cat("None of the 4 mortality fish were detected outside the study site.\n")
 } else {
-  cat("⚠️ The following mortality fish were detected outside the study site:\n")
+  cat("The following mortality fish were detected outside the study site:\n")
   print(detected_outside_mortality)
 }
 
@@ -332,23 +342,32 @@ ms_field <- survfit(Surv(int, event) ~ 1, data = final_df)
 p_field <- ggsurvplot(
   ms_field,
   censor = TRUE,
-  palette = "darkblue"
-) +
-  theme_survminer(font.x = c(16), font.y = c(16), font.legend = c(14)) +
-  labs(x = "Time (Days)", y = "Survival Probability")
+  palette = "darkblue",
+  xlab = "Time (Days)",
+  ylab = "Survival Probability",
+  font.x = 16,
+  font.y = 16,
+  font.legend = 14
+)
 
-print(p_field)
+p_field  
+
 
 #lab dataset survival (from 'd')
 ms_lab <- survfit(Surv(int, m) ~ 1, data = d)
 
-p_lab <- ggsurvplot(ms_lab, 
-                    censor = TRUE, 
-                    palette = "darkgreen") +
-  theme_survminer(font.x = c(16), font.y = c(16), font.legend = c(14)) +
-  labs(x = "Time (Days)", y = "Survival Probability")
+p_lab <- ggsurvplot(
+  ms_lab,
+  censor = TRUE,
+  palette = "darkgreen",
+  xlab = "Time (Days)",
+  ylab = "Survival Probability",
+  font.x = 16,
+  font.y = 16,
+  font.legend = 14
+)
 
-print(p_lab)
+p_lab 
 
 #combine field vs lab
 p_combined <- ggsurvplot_combine(
@@ -358,12 +377,15 @@ p_combined <- ggsurvplot_combine(
   legend.labs = c("Field", "Lab"),
   censor = TRUE,
   conf.int = FALSE,
-  palette = c("darkblue", "forestgreen")
-) +
-  theme_survminer(font.x = c(16), font.y = c(16), font.legend = c(16)) +
-  labs(x = "Time (Days)", y = "Survival Probability")
+  palette = c("darkblue", "forestgreen"),
+  xlab = "Time (Days)",
+  ylab = "Survival Probability",
+  font.x = 16,
+  font.y = 16,
+  font.legend = 16
+)
 
-print(p_combined)
+p_combined 
 
 #log-rank test
 field_data <- final_df %>%
