@@ -61,8 +61,6 @@ stationary_events_final <- stationary_events %>%
   filter(end_time == last_dt)
 
 potential_mortality_ids <- unique(stationary_events_final$oid)
-View(potential_mortality_ids)
-length(potential_mortality_ids) #9
 
 #highlight mortality events
 #create a new column indicating mortality status in last detections
@@ -141,8 +139,8 @@ atlantic
 
 
 #load detections from OTN
-dets_out <- read_csv("~/Documents/MSc/Ongoing Papers/Mackerel /v2lnasti_matched_detections_2024.csv") %>%
-  dplyr::select(tagname, station, datecollected, longitude, latitude) %>%
+dets_out <- read_csv("v2lnasti_matched_detections_2024.csv") %>% 
+dplyr::select(tagname, station, datecollected, longitude, latitude) %>%
   rename(oid = tagname, date = datecollected, lon = longitude, lat = latitude)
 
 #merge with clean tag metadata
@@ -168,11 +166,11 @@ dets_out_filt <- dets_out_filt %>%
 #confirm that all detections are from outside the study site
 unique(dets_out_filt$station)
 
-# Define the stations you want to remove
+#define the stations you want to remove
 stations_to_remove <- c("APPROACHES03", "APPROACHES02", "APPROACHES01", 
                         "MACDONALD", "MACKAY", "HFX001")
 
-# Filter them out of the detections
+#filter them out of the detections
 dets_out_filt <- dets_out_filt %>%
   filter(!station %in% stations_to_remove)
 
@@ -182,7 +180,6 @@ oids_to_remove <- unique(dets_out_filt$oid)
 
 #remove them from potential mortalities
 potential_mortality_ids <- setdiff(potential_mortality_ids, oids_to_remove)
-View(potential_mortality_ids)
 
 #how many days was this final fish detected as receiver 10?
 target_oid <- "A69-1303-8980"
