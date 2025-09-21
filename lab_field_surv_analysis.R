@@ -108,21 +108,22 @@ print(table(final_df$event)) #expect: 0=survivors, 1=mortalities
 #kaplan-meier survival estimate
 ms_field <- survfit(Surv(int, event) ~ 1, data = final_df)
 
-#plot survival curve
 p_field <- ggsurvplot(
   ms_field,
   censor = TRUE,
   palette = "darkblue"
-) +
-  theme_survminer(font.x = c(16), font.y = c(16), font.legend = c(14)) +
+)
+
+# Now modify the plot
+p_field$plot <- p_field$plot +
+  theme_survminer(font.x = 16, font.y = 16, font.legend = 14) +
   labs(x = "time (days)", y = "survival probability")
 
 print(p_field)
 
 
-
 ####SURVIVAL CODE FOR LAB MACKEREL-----------------
-#NEED TO LOAD MACKEREL LAB FILE AND RUN SCRIPT BEFORE NEXT STEPS
+#NEED TO LOAD "mackerel_lab.R" file AND RUN SCRIPT BEFORE NEXT STEPS
 
 ms_lab <- survfit(Surv(int, m) ~ 1, data = d)
 
@@ -203,8 +204,6 @@ dets_out_cleaned <- dets_out %>%
 #get list of unique fish (oids) detected outside the study site
 fish_detected_outside <- unique(dets_out_cleaned$oid)
 
-#view or write to file if needed
-View(fish_detected_outside)
 length(fish_detected_outside)
 #[33]
 
