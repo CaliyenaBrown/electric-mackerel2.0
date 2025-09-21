@@ -25,7 +25,7 @@ saveRDS(NW_meta2, file = "NW_meta_clean.rds")
 
 
 #load detection data
-NW_det <- readRDS("~/Documents/MSc/Ongoing Papers/Mackerel /NWArm_Mackerel (2).rds") %>%
+NW_det <- readRDS("NWArm_Mackerel (2).rds") %>%
   dplyr::select(-speed, -llon, -llat, -lag_station, -lagdt, -dist, -time_diff) %>%
   dplyr::rename(station = r) %>%
   dplyr::inner_join(NW_meta2, by = "station") %>%
@@ -74,3 +74,7 @@ tagmeta_filtered <- tagmeta %>%
   )
 
 saveRDS(tagmeta_filtered, file = "tagmeta_clean.rds")
+
+
+
+
